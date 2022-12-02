@@ -9,30 +9,32 @@
   </li>
 </ul>
 
-<div class="container mt-5"></div>
-<form method="POST" id="new">
-  <input type="hidden" name="acao" value="cadastrar">
-  <!-- Nome input -->
-  <div class="form-outline mb-4">
-    <input type="nome" id="nome" class="form-control" name="nome" placeholder="Insisa seu nome aqui"/>
-    <label class="form-label" for="nome">Nome</label>
-  </div>
+<div class="container-fluid mt-5">
+  <form method="POST" id="new">
+    <input type="hidden" name="acao" value="cadastrar">
+    
+    <!-- Nome input -->
+    <div class="form-outline mb-4">
+      <input type="nome" id="nome" class="form-control" name="nome" placeholder="Insisa seu nome aqui"/>
+      <label class="form-label" for="nome">Nome</label>
+    </div>
 
-  <!-- Email input -->
-  <div class="form-outline mb-4">
-    <input type="email" id="email" class="form-control" name="email" placeholder="Informe seu e-mail"/>
-    <label class="form-label" for="email">E-mail</label>
-  </div>
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="email" id="email" class="form-control" name="email" placeholder="Informe seu e-mail"/>
+      <label class="form-label" for="email">E-mail</label>
+    </div>
 
-  <!-- Password input -->
-  <div class="form-outline mb-4">
-    <input type="password" id="senha" class="form-control" name="senha" placeholder="Insira sua senha"/>
-    <label class="form-label" for="senha">Password</label>
-  </div>
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" id="senha" class="form-control" name="senha" placeholder="Insira sua senha"/>
+      <label class="form-label" for="senha">Password</label>
+    </div>
 
-  <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block mb-4">Cadastrar</button>
-</form>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Cadastrar</button>
+  </form>
+</div>
 
 <script>
   $( document ).ready(function() {

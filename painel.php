@@ -1,3 +1,7 @@
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js">
+</script>
+
 <?php
     include('protect.php');
 ?>
@@ -11,16 +15,25 @@
     <title>Painel</title>
 </head>
 <body>
-    <h1>OLÁ MUNDO!!!</h1>
     <?php
+    $nome = ($_SESSION['nome']);
+    echo "<h1> Seja bem vindo </h1>";
 
     if(isset($_SESSION['nome'])){
         echo ($_SESSION['nome']);
+        
     }
     
     ?>
-    <p>
-        <a href="logout.php">Sair</a>
-    </p>
+
+<script>
+        $('#btn-sair').show();  
+        $('#btn-post').hide();
+        
+         
+      
+       
+    </script>
+    
 </body>
 </html>
