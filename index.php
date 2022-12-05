@@ -38,7 +38,7 @@
             </ul>
               
               <a class="button btn btn-primary text-white ms-auto" id="btn-post" href="index.php?page=login">Entrar</a>
-              <a class="button btn btn-primary text-white ms-auto m-2" id="btn-sair" href="logout.php">Sair</a>
+              <a class="button btn btn-primary text-white ms-auto d-none m-2" id="btn-sair" href="logout.php">Sair</a>
               
           </div>     
         </div>
@@ -60,10 +60,26 @@
           </div>
         </div>
       </div>
-
+      
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
-    
+                  
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="gallery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="img/1.jpg" class="modal-img" alt="modal img">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </body>
 </html>
