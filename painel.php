@@ -1,6 +1,7 @@
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js">
-</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+<script src="js/main.js"></script>
 
 <?php
     include('protect.php');
@@ -110,37 +111,67 @@
             }
     
         ?>
+            <div class="container-fluid mt-5">
+                <div class="input-group rounded">
+                    
+                    <input type="text" 
+                        class="form-control rounded"
+                        name="consulta"
+                        id="txt_consulta"
+                        placeholder="Barra de pesquisa" 
+                        aria-label="Search" 
+                        aria-describedby="search-addon" 
+                    />
+                    <span class="input-group-text border-0" id="search-addon">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
+            </div>
+            
+            
+        <div class="container-fluid mt-5">
+         <h1>Lista da suas imagens</h1>
+            <?php
+            
+                $sql = "SELECT * FROM uploads WHERE id_user=".$_SESSION["id"];
+                $res = $mysqli->query($sql);
 
-        <h1>Lista da suas imagens</h1>
-        <?php
-        
-            $sql = "SELECT * FROM uploads WHERE id_user=".$_SESSION["id"];
-            $res = $mysqli->query($sql);
+                $qtd = $res->num_rows;
 
-            $qtd = $res->num_rows;
+                if($qtd>0){
+                    print"<table id='tabela' class='table table-hover table-striped table-bordered'>";
+                        print "<thead>";
+                            print "<tr>";
+                                print "<th>#</th>";
+                                print "<th>NOME IMAGEM</th>";
+                                print "<th>DATA IMAGEM</th>";
+                                print "<th>IMAGEM</th>";
+                            print"</tr>";
+                        print "</thead>";
+                            while($row = $res->fetch_object()){
+                            print "<tbody>";
+                                print "<tr>";
+                                    print "<td>".$row->id_user."</td>";
+                                    print "<td>".$row->nome_img."</td>";
+                                    print "<td>".$row->data_img."</td>";
+                                    echo  "<td>" .'<img src="' . $row->img .'" width="100px" height="auto" class="gallery-item"> </td>';
+                                print"</tr>";
+                            print "</tbody>";
+                    }
+                    print"</table>";
+                    
 
-            if($qtd>0){
-                print"<table class='table table-hover table-striped table-bordered'>";
-                print "<tr>";
-                    print "<th>#</th>";
-                    print "<th>NOME IMAGEM</th>";
-                    print "<th>DATA IMAGEM</th>";
-                    print "<th>IMAGEM</th>";
-                    print"</tr>";
-                while($row = $res->fetch_object()){
-                    print "<tr>";
-                    print "<td>".$row->id_user."</td>";
-                    print "<td>".$row->nome_img."</td>";
-                    print "<td>".$row->data_img."</td>";
-                    echo  "<td>" .'<img src="' . $row->img .'" width="100px" height="auto" class="gallery-item"> </td>';
-                    print"</tr>";
+                }else{
+                    print"<p class='alert alert-danger'>Nenhum usuário encontrado</p>";
                 }
-                print"</table>";
+                
+            ?>
+            <script>
+	            $('input#txt_consulta').quicksearch('table#tabela tbody tr');
+            </script>
+        </div>
 
-            }else{
-                print"<p class='alert alert-danger'>Nenhum usuário encontrado</p>";
-            }
-        ?>
-    <script src="js/main.js"></script>
+    
+            
     </body>
 </html>
