@@ -108,6 +108,10 @@
                     }
                 }
                 break;
+
+           
+                
+                
             }
     
         ?>
@@ -151,10 +155,18 @@
                             while($row = $res->fetch_object()){
                             print "<tbody>";
                                 print "<tr>";
-                                    print "<td>".$row->id_user."</td>";
+                                    print "<td>".$row->id_img."</td>";
                                     print "<td>".$row->nome_img."</td>";
                                     print "<td>".$row->data_img."</td>";
                                     echo  "<td>" .'<img src="' . $row->img .'" width="100px" height="auto" class="gallery-item"> </td>';
+                                    print "<td>
+                                                <button onclick=\"location.href='index.php?page=editar&id=".$row->id_img."';\" class='btn btn-success'>Editar</button>
+                                               
+                                                <button onclick=\"if(confirm('Tem certeza que deseja excluir?')){
+                                                    location.href='?page=salvar&acao=excluir&id=".$row->id_img."';}
+                                                    else{false;}\" 
+                                                class='btn btn-danger'>Excluir</button>
+                                            </td>";
                                 print"</tr>";
                             print "</tbody>";
                     }
