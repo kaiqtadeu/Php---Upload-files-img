@@ -61,60 +61,7 @@
         </div>
         
 
-        <?php
-            switch(isset($_REQUEST["acao"])){
-                case 'upload':
-                    if($_POST["nomeprint"]==""){
-                    print"<script>alert('Por favor, insira o nome do arquivo');</script>";
-                    } else if ($_FILES["fileprint"]==""){
-                    print"<script>alert('Por favor insira o arquivo');</script>";
-                    } else if ($_POST["dataprint"]==""){
-                    print"<script>alert('Por favor, insira a data do print');</script>";
-                } else {
-
-                    $usuario = $_SESSION['id'];
-                    $nomeprint = $_POST["nomeprint"];
-                    $fileprint = $_FILES["fileprint"];
-                    $dataprint = $_POST["dataprint"];
-
-                    /*
-                    echo '<pre>';
-                    print_r($_REQUEST);
-                    print_r($_FILES);
-                    echo '</pre>';
-                    echo $_FILES['fileprint']['tmp_name'];*/
-
-                    $tipos = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
-                    if (in_array($_FILES['fileprint']['type'], $tipos)) {
-
-
-                        $path = $_FILES['fileprint']['tmp_name'];
-                        $data = file_get_contents($path);
-                        $base64 = 'data:' . $_FILES['fileprint']['type'] . ';base64,' . base64_encode($data);
-
-                        $sql = "INSERT INTO uploads (id_user, nome_img, img, data_img) 
-                        values ('{$usuario}', '{$nomeprint}', '{$base64}', '{$dataprint}')";
-
-                        $res = $mysqli->query($sql);
-
-                        if ($res == true) {
-                            print "<script>alert('Cadastrado com sucesso');</script>";
-
-                        } else {
-                            print "<script>alert('Ocorreu algum erro, tente novamente');</script>";
-                        }
-                    } else {
-                        print "<script>alert('Formato incorreto');</script>";
-                    }
-                }
-                break;
-
-           
-                
-                
-            }
-    
-        ?>
+        
             <div class="container-fluid mt-5">
                 <div class="input-group rounded">
                     
@@ -163,7 +110,7 @@
                                                 <button onclick=\"location.href='index.php?page=editar&id=".$row->id_img."';\" class='btn btn-success'>Editar</button>
                                                
                                                 <button onclick=\"if(confirm('Tem certeza que deseja excluir?')){
-                                                    location.href='?page=salvar&acao=excluir&id=".$row->id_img."';}
+                                                    location.href='index.php?page=editar&acao=excluir&id=".$row->id_img."';}
                                                     else{false;}\" 
                                                 class='btn btn-danger'>Excluir</button>
                                             </td>";
@@ -183,7 +130,51 @@
             </script>
         </div>
 
+        <?php
+            switch(isset($_REQUEST["acao"])){
+                case 'upload':
+                    if($_POST["nomeprint"]==""){
+                    print"<script>alert('Por favor, insira o nome do arquivo');</script>";
+                    } else if ($_FILES["fileprint"]==""){
+                    print"<script>alert('Por favor insira o arquivo');</script>";
+                    } else if ($_POST["dataprint"]==""){
+                    print"<script>alert('Por favor, insira a data do print');</script>";
+                } else {
+
+                    $usuario = $_SESSION['id'];
+                    $nomeprint = $_POST["nomeprint"];
+                    $fileprint = $_FILES["fileprint"];
+                    $dataprint = $_POST["dataprint"];
+                    $tipos = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
+
+                    if (in_array($_FILES['fileprint']['type'], $tipos)) {
+
+
+                        $path = $_FILES['fileprint']['tmp_name'];
+                        $data = file_get_contents($path);
+                        $base64 = 'data:' . $_FILES['fileprint']['type'] . ';base64,' . base64_encode($data);
+
+                        $sql = "INSERT INTO uploads (id_user, nome_img, img, data_img) 
+                        values ('{$usuario}', '{$nomeprint}', '{$base64}', '{$dataprint}')";
+
+                        $res = $mysqli->query($sql);
+
+                        if ($res == true) {
+                            print "<script>alert('Cadastrado com sucesso');</script>";
+
+                        } else {
+                            print "<script>alert('Ocorreu algum erro, tente novamente');</script>";
+                        }
+                    } else {
+                        print "<script>alert('Formato incorreto');</script>";
+                    }
+                }
+                break;                
+                
+                
+            }
     
+        ?>
             
     </body>
 </html>

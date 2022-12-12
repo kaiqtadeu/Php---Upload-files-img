@@ -77,7 +77,7 @@
             
             if($res==true){
                 print"<script>alert('Cadastrado com sucesso');</script>";
-                print"<script>location.href='?listar-usuario.php';</script>";
+               
             }else{
                 print"<script>alert('Ocorreu algum erro, tente novamente');</script>";
             }
