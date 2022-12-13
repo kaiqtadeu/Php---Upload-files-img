@@ -12,7 +12,9 @@
       <title>Login</title>
     </head>
   <body>
+  <script src="js/main.js"></script>
 
+  
   <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-light bg-light m-4">
         <div class="container-fluid">
@@ -39,14 +41,19 @@
               </li>
 
             </ul>
-              
-              <a class="button btn btn-primary text-white ms-auto" id="btn-post" href="index.php?page=login">Entrar</a>
-              <a class="button btn btn-primary text-white ms-auto d-none m-2" id="btn-sair" href="logout.php">Sair</a>
-              
+              <?php
+              session_start();
+
+              if(isset($_SESSION['logado']) && $_SESSION['logado']=='S'){
+                echo '<a class="button btn btn-primary text-white ms-auto m-2"  href="logout.php">Sair</a>';
+              } else {
+                echo '<a class="button btn btn-primary text-white ms-auto" href="index.php?page=login">Entrar</a>';
+              }
+              ?>              
           </div>     
         </div>
       </nav>
-
+ 
       
 
       <div class="container-fluid">
@@ -82,7 +89,8 @@
         </div>
       </div>
     </div>
-
+    
+   
 
   </body>
 </html>

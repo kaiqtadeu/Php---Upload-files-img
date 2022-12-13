@@ -54,48 +54,49 @@
 </script>
      <?php
 
-    
-     switch (($_REQUEST["acao"])) {
-         case 'editar':
-             $nome = $_POST["nomeprint"];
-             $file = $_FILES["fileprint"];
-             $date = $_POST["dataprint"];
-             $tipos = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
+     if (isset($_REQUEST["acao"])) {
+         switch (($_REQUEST["acao"])) {
+             case 'editar':
+                 $nome = $_POST["nomeprint"];
+                 $file = $_FILES["fileprint"];
+                 $date = $_POST["dataprint"];
+                 $tipos = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
 
-             if (in_array($_FILES['fileprint']['type'], $tipos)) {
-                 $path = $_FILES['fileprint']['tmp_name'];
-                 $data = file_get_contents($path);
-                 $base64 = 'data:' . $_FILES['fileprint']['type'] . ';base64,' . base64_encode($data);
+                 if (in_array($_FILES['fileprint']['type'], $tipos)) {
+                     $path = $_FILES['fileprint']['tmp_name'];
+                     $data = file_get_contents($path);
+                     $base64 = 'data:' . $_FILES['fileprint']['type'] . ';base64,' . base64_encode($data);
 
 
-                 $sql = "UPDATE uploads SET nome_img='{$nome}', img='{$base64}', data_img='{$date}'
+                     $sql = "UPDATE uploads SET nome_img='{$nome}', img='{$base64}', data_img='{$date}'
                  WHERE id_img=" . $_REQUEST["id"];
 
+                     $res = $mysqli->query($sql);
+
+                     if ($res == true) {
+                         print "<script>alert('Editado com sucesso');</script>";
+                         print "<script>location.href='index.php?page=painel';</script>";
+                     } else {
+                         print "<script>alert('Não foi possível editar, tente novamente');</script>";
+                     }
+                 }
+
+                 break;
+
+             case 'excluir':
+                 $sql = "DELETE from uploads WHERE id_img=" . $_REQUEST["id"];
                  $res = $mysqli->query($sql);
 
                  if ($res == true) {
-                     print "<script>alert('Editado com sucesso');</script>";
-                     print "<script>location.href='index.php?page=painel';</script>";
+                     print "<script>alert('Excluido com sucesso');</script>";
+                     print "<script>location.href='?page=painel';</script>";
                  } else {
-                     print "<script>alert('Não foi possível editar, tente novamente');</script>";
+                     print "<script>alert('Não foi possível excluir, tente novamente');</script>";
                  }
-             }
-             
-             break;
+                 ;
 
-             case 'excluir':
-                $sql = "DELETE from uploads WHERE id_img=".$_REQUEST["id"];
-                $res = $mysqli->query($sql);
-                
-                if($res==true){
-                    print"<script>alert('Excluido com sucesso');</script>";
-                    print"<script>location.href='?page=painel';</script>";
-                }else{
-                    print"<script>alert('Não foi possível excluir, tente novamente');</script>";
-                };
-    
-    
-                break;
+
+                 break;
+         }
      }
-
      ?>

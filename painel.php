@@ -6,10 +6,6 @@
 <?php
     include('protect.php');
 ?>
-<script>
-    $('#btn-post').hide();
-    $('#btn-sair').removeClass('d-none');        
-</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +103,7 @@
                                     print "<td>".$row->data_img."</td>";
                                     echo  "<td>" .'<img src="' . $row->img .'" width="100px" height="auto" class="gallery-item"> </td>';
                                     print "<td>
-                                                <button onclick=\"location.href='index.php?page=editar&id=".$row->id_img."';\" class='btn btn-success'>Editar</button>
+                                                <button onclick=\"location.href='?page=editar&id=".$row->id_img."';\" class='btn btn-success'>Editar</button>
                                                
                                                 <button onclick=\"if(confirm('Tem certeza que deseja excluir?')){
                                                     location.href='index.php?page=editar&acao=excluir&id=".$row->id_img."';}
@@ -175,6 +171,9 @@
             }
     
         ?>
-            
+            <script>
+    $('#btn-post').hide();
+    $('#btn-sair').removeClass('d-none');        
+</script>
     </body>
 </html>
